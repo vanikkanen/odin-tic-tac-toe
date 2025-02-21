@@ -54,3 +54,27 @@ const Gameboard = (function() {
     }
 
 })()
+
+const Player = (function(initName, initMarker) {
+    let name = initName
+    const marker = initMarker
+
+    const setName = (newName) => {
+        name = newName
+    }
+
+    const getName = () => {
+        return name
+    }
+
+    const getMarker = () => {
+        return marker
+    }
+
+    return {
+        setName,
+        getName,
+        getMarker,
+    }
+})
+
