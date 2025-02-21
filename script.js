@@ -84,3 +84,50 @@ const Player = (function(initName, initMarker) {
     }
 })
 
+const Game = (function() {
+    const p1 = Player("Player 1", "X")
+    const p2 = Player("Player 2", "O")
+
+    let currentPlayer = p1
+    const gameRounds = 3
+
+    const switchPlayer = () => {
+        currentPlayer = (currentPlayer === p1) ? p2 : p1
+    }
+
+    const game = () => {
+
+        // Player 1 starts, and then the turns alternate between the players until match is won. 
+        // Game continues until gameRounds of rounds have been played
+
+
+    }
+
+    const round = () => {
+
+
+
+
+    }
+
+    const playTurn = (x, y) => {
+        if(Gameboard.moveToBoard(x, y, currentPlayer.getMarker())) {
+            if (Gameboard.checkForWin()) {
+                console.log(`${currentPlayer.getName()} wins!`)
+                return
+            }
+            if (Gameboard.checkForTie()) {
+                console.log("It's a tie!")
+                return
+            }
+            switchPlayer()
+        } else {
+            console.log("Invalid move, try again.")
+        }
+    }
+
+    return {
+        playTurn,
+    }
+
+})()
