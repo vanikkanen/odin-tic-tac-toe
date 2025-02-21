@@ -22,7 +22,7 @@ const Gameboard = (function() {
         return true
     }
 
-    const checkGameOver = () => {
+    const checkForWin = () => {
 
         const allEqual = (arr) => arr.every(val => val === arr[0] && val !== null)
 
@@ -46,11 +46,17 @@ const Gameboard = (function() {
         return false
     }
 
+    const checkForTie = () => {
+        const boardFull = board.every(row => row.every(val => val !== null) === true)
+        return (!checkForWin && boardFull)
+    }
+
     return {
         getBoard,
-        moveToBoard,
-        checkGameOver,
         resetBoard,
+        moveToBoard,
+        checkForWin,
+        checkForTie,
     }
 
 })()
