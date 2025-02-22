@@ -64,6 +64,7 @@ const Gameboard = (function() {
 const Player = (function(initName, initMarker) {
     let name = initName
     const marker = initMarker
+    let score = 0
 
     const setName = (newName) => {
         name = newName
@@ -77,10 +78,20 @@ const Player = (function(initName, initMarker) {
         return marker
     }
 
+    const getScore = () => {
+        return score
+    }
+
+    const addScore = () => {
+        score += 1
+    }
+
     return {
         setName,
         getName,
         getMarker,
+        getScore,
+        addScore,
     }
 })
 
