@@ -100,35 +100,37 @@ const Game = (function() {
     const p2 = Player("Player 2", "O")
 
     let currentPlayer = p1
-    const gameRounds = 3
+    let nextStartingPlayer = p2
+    let gameOver = false
 
     const switchPlayer = () => {
         currentPlayer = (currentPlayer === p1) ? p2 : p1
     }
 
-    const game = () => {
-
-        // Player 1 starts, and then the turns alternate between the players until match is won. 
-        // Game continues until gameRounds of rounds have been played
-
-
-    }
-
-    const round = () => {
-
-
-
-
+    const resetGame = () => {
+        Gameboard.resetBoard()
+        currentPlayer = nextStartingPlayer
+        nextStartingPlayer = (nextStartingPlayer === p1) ? p2 : p1
+        gameOver = false
+        console.log("Game restarted!")
     }
 
     const playTurn = (x, y) => {
+        if (gameOver) {
+            console.log("Game is over! Restart to play again")
+            return
+        }
         if(Gameboard.moveToBoard(x, y, currentPlayer.getMarker())) {
+            console.table(Gameboard.getBoard())
             if (Gameboard.checkForWin()) {
                 console.log(`${currentPlayer.getName()} wins!`)
+                currentPlayer.addScore()
+                gameOver = true
                 return
             }
             if (Gameboard.checkForTie()) {
                 console.log("It's a tie!")
+                gameOver = true
                 return
             }
             switchPlayer()
@@ -139,6 +141,7 @@ const Game = (function() {
 
     return {
         playTurn,
+        resetGame,
     }
 
 })()
