@@ -112,6 +112,7 @@ const Game = (function() {
         currentPlayer = nextStartingPlayer
         nextStartingPlayer = (nextStartingPlayer === p1) ? p2 : p1
         gameOver = false
+        displayController.renderGameboard()
         console.log("Game restarted!")
     }
 
@@ -121,7 +122,6 @@ const Game = (function() {
             return
         }
         if(Gameboard.moveToBoard(x, y, currentPlayer.getMarker())) {
-            console.table(Gameboard.getBoard())
             if (Gameboard.checkForWin()) {
                 console.log(`${currentPlayer.getName()} wins!`)
                 currentPlayer.addScore()
@@ -147,7 +147,7 @@ const Game = (function() {
 })()
 
 const displayController = (function() {
-    
+
     const renderGameboard = () => {
         const displayBoard = document.querySelector(".gameboard")
         displayBoard.innerHTML = ""
