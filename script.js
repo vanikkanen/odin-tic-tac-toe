@@ -145,3 +145,32 @@ const Game = (function() {
     }
 
 })()
+
+const displayController = (function() {
+    
+    const renderGameboard = () => {
+        const displayBoard = document.querySelector(".gameboard")
+        displayBoard.innerHTML = ""
+        Gameboard.getBoard().forEach((row, x) => {
+            row.forEach((tile, y) => {
+                const gameTile  = document.createElement("div")
+                gameTile.classList.add("game-tile")
+                gameTile.innerHTML = tile
+
+                gameTile.addEventListener("click", () =>{
+                    Game.playTurn(x, y)
+                    renderGameboard()
+                } )
+
+                displayBoard.appendChild(gameTile)
+            })
+        })
+    }
+
+    return {
+        renderGameboard,
+    }
+
+})()
+
+displayController.renderGameboard()
