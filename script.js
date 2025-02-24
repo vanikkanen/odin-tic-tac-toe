@@ -195,11 +195,9 @@ const displayController = (function() {
                     nameDisplay.setAttribute("contenteditable", "false")
                     editButton.classList.toggle("toggled")
                     Game.updatePlayerName(player, nameDisplay.textContent)
-                    editButton.textContent = "Edit Name"
                 }
                 else {
                     nameDisplay.setAttribute("contenteditable", "true")
-                    editButton.textContent = "Save"
                     editButton.classList.toggle("toggled")
                     nameDisplay.focus()
                 }

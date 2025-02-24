@@ -27,6 +27,7 @@ body {
 
 .player-name-container {
     display: flex;
+    gap: 8px;
 }
 
 .player-name {
@@ -34,7 +35,19 @@ body {
 }
 
 .edit-player-name-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
 
+.toggled {
+    color: lightblue;
 }
 
 .player-score {
