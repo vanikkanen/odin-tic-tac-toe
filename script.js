@@ -105,6 +105,7 @@ const Game = (function() {
 
     const switchPlayer = () => {
         currentPlayer = (currentPlayer === p1) ? p2 : p1
+        displayController.renderGameMessage(`${currentPlayer.getName()}'s turn!`)
     }
 
     const resetGame = () => {
@@ -113,29 +114,29 @@ const Game = (function() {
         nextStartingPlayer = (nextStartingPlayer === p1) ? p2 : p1
         gameOver = false
         displayController.renderGameboard()
-        console.log("Game restarted!")
+        displayController.renderGameMessage("Game restarted!")
     }
 
     const playTurn = (x, y) => {
         if (gameOver) {
-            console.log("Game is over! Restart to play again")
+            displayController.renderGameMessage("Game is over! Restart to play again")
             return
         }
         if(Gameboard.moveToBoard(x, y, currentPlayer.getMarker())) {
             if (Gameboard.checkForWin()) {
-                console.log(`${currentPlayer.getName()} wins!`)
+                displayController.renderGameMessage(`${currentPlayer.getName()} wins!`)
                 currentPlayer.addScore()
                 gameOver = true
                 return
             }
             if (Gameboard.checkForTie()) {
-                console.log("It's a tie!")
+                displayController.renderGameMessage("It's a tie!")
                 gameOver = true
                 return
             }
             switchPlayer()
         } else {
-            console.log("Invalid move, try again.")
+            displayController.renderGameMessage("Invalid move, try again.")
         }
     }
 
@@ -167,8 +168,15 @@ const displayController = (function() {
         })
     }
 
+    const renderGameMessage = (function(message) {
+        const displayMessage = document.querySelector(".game-message")
+        displayMessage.innerHTML = ""
+        displayMessage.innerHTML = message
+    })
+
     return {
         renderGameboard,
+        renderGameMessage,
     }
 
 })()
