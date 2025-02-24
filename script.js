@@ -119,7 +119,7 @@ const Game = (function() {
         nextStartingPlayer = (nextStartingPlayer === p1) ? p2 : p1
         gameOver = false
         displayController.renderGameboard()
-        displayController.renderGameMessage("Game restarted!")
+        displayController.renderGameMessage(`Game restarted, ${currentPlayer.getName()} starts!`)
     }
 
     const resetGame = () => {
@@ -128,7 +128,7 @@ const Game = (function() {
         gameOver = false
         Gameboard.resetBoard()
         displayController.renderGameboard()
-        displayController.renderGameMessage("Game reset!")
+        displayController.renderGameMessage(`Game reset!`)
         p1.resetScore()
         displayController.renderPlayerScore(p1.getScore(), "player1")
         p2.resetScore()
