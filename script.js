@@ -169,6 +169,20 @@ const Game = (function() {
 
 const displayController = (function() {
 
+    const setUpGame = () => {
+        //Connect buttons to game functionality
+        const newGameButton = document.querySelector(".new-game-button")
+        newGameButton.addEventListener("click", () => {
+            Game.nextRound()
+        })
+        const resetButton = document.querySelector(".reset-game-button")
+        resetButton.addEventListener("click", () => {
+            Game.resetGame()
+        })
+        //Render the game board
+        renderGameboard()
+    }
+
     const renderGameboard = () => {
         const displayBoard = document.querySelector(".gameboard")
         displayBoard.innerHTML = ""
@@ -199,6 +213,7 @@ const displayController = (function() {
     })
 
     return {
+        setUpGame,
         renderGameboard,
         renderGameMessage,
         renderPlayerScore,
@@ -206,4 +221,4 @@ const displayController = (function() {
 
 })()
 
-displayController.renderGameboard()
+displayController.setUpGame()
