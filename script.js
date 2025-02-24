@@ -78,6 +78,10 @@ const Player = (function(initName, initMarker) {
         return marker
     }
 
+    const resetScore = () => {
+        score = 0
+    }
+
     const getScore = () => {
         return score
     }
@@ -90,6 +94,7 @@ const Player = (function(initName, initMarker) {
         setName,
         getName,
         getMarker,
+        resetScore,
         getScore,
         addScore,
     }
@@ -108,13 +113,26 @@ const Game = (function() {
         displayController.renderGameMessage(`${currentPlayer.getName()}'s turn!`)
     }
 
-    const resetGame = () => {
+    const nextRound = () => {
         Gameboard.resetBoard()
         currentPlayer = nextStartingPlayer
         nextStartingPlayer = (nextStartingPlayer === p1) ? p2 : p1
         gameOver = false
         displayController.renderGameboard()
         displayController.renderGameMessage("Game restarted!")
+    }
+
+    const resetGame = () => {
+        currentPlayer = p1
+        nextStartingPlayer = p2
+        gameOver = false
+        Gameboard.resetBoard()
+        displayController.renderGameboard()
+        displayController.renderGameMessage("Game reset!")
+        p1.resetScore()
+        displayController.renderPlayerScore(p1.getScore(), "player1")
+        p2.resetScore()
+        displayController.renderPlayerScore(p2.getScore(), "player2")
     }
 
     const playTurn = (x, y) => {
@@ -143,6 +161,7 @@ const Game = (function() {
 
     return {
         playTurn,
+        nextRound,
         resetGame,
     }
 
