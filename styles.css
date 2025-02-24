@@ -11,9 +11,50 @@ body {
 }
 
 .game-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: start;
     justify-content: center;
+}
+
+.player-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-name-container {
+    display: flex;
+}
+
+.player-name {
+
+}
+
+.edit-player-name-button {
+
+}
+
+.player-score {
+
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.game-message {
+
+}
+
+.new-game-button {
+
 }
 
 .gameboard {
