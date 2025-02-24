@@ -126,6 +126,7 @@ const Game = (function() {
             if (Gameboard.checkForWin()) {
                 displayController.renderGameMessage(`${currentPlayer.getName()} wins!`)
                 currentPlayer.addScore()
+                displayController.renderPlayerScore(currentPlayer.getScore(), (currentPlayer === p1) ? "player1" : "player2")
                 gameOver = true
                 return
             }
@@ -170,13 +171,18 @@ const displayController = (function() {
 
     const renderGameMessage = (function(message) {
         const displayMessage = document.querySelector(".game-message")
-        displayMessage.innerHTML = ""
         displayMessage.innerHTML = message
+    })
+
+    const renderPlayerScore = (function(score, playerClass) {
+        const displayScore = document.querySelector(`.player-score.${playerClass}`)
+        displayScore.innerHTML = score
     })
 
     return {
         renderGameboard,
         renderGameMessage,
+        renderPlayerScore,
     }
 
 })()
