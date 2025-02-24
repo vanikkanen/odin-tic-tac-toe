@@ -48,7 +48,7 @@ const Gameboard = (function() {
 
     const checkForTie = () => {
         const boardFull = board.every(row => row.every(val => val !== null) === true)
-        return (!checkForWin && boardFull)
+        return (!checkForWin() && boardFull)
     }
 
     return {
@@ -153,7 +153,7 @@ const Game = (function() {
                 gameOver = true
                 return
             }
-            switchPlayer()
+            if (!gameOver) switchPlayer()
         } else {
             displayController.renderGameMessage("Invalid move, try again.")
         }
