@@ -77,7 +77,12 @@ body {
 }
 
 .game-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: lightblue;
     height: 100px;
+    box-shadow: 5px 5px 5px gray;
+    font-size: 100px;
 
 }
