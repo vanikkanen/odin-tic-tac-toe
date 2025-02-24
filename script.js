@@ -159,10 +159,16 @@ const Game = (function() {
         }
     }
 
+    const updatePlayerName = (player, newName) => {
+        const editPlayer = player === "player1" ? p1 : p2
+        editPlayer.setName(newName)
+    }
+
     return {
         playTurn,
         nextRound,
         resetGame,
+        updatePlayerName,
     }
 
 })()
@@ -179,6 +185,30 @@ const displayController = (function() {
         resetButton.addEventListener("click", () => {
             Game.resetGame()
         })
+
+        const connectEditButton = (player) => {
+            const nameDisplay = document.querySelector(`.player-name.${player}`)
+            const editButton = document.querySelector(`.edit-player-name-button.${player}`)
+            editButton.addEventListener("click", () => {
+                const isEditing = nameDisplay.getAttribute("contenteditable") === "true";
+                if (isEditing) {
+                    nameDisplay.setAttribute("contenteditable", "false")
+                    editButton.classList.toggle("toggled")
+                    Game.updatePlayerName(player, nameDisplay.textContent)
+                    editButton.textContent = "Edit Name"
+                }
+                else {
+                    nameDisplay.setAttribute("contenteditable", "true")
+                    editButton.textContent = "Save"
+                    editButton.classList.toggle("toggled")
+                    nameDisplay.focus()
+                }
+            })
+        }
+
+        connectEditButton("player1")
+        connectEditButton("player2")
+
         //Render the game board
         renderGameboard()
     }
